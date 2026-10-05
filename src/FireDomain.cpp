@@ -9,6 +9,7 @@
  #include "FireDomain.h"
  #include "BurningMapLayer.h"
  
+ #include <algorithm>
  #include <sys/stat.h>
  #include "RosLayer.h"
  
@@ -2201,7 +2202,8 @@
  
 	 void FireDomain::addToTrashFronts(FireFront* ff){
 		 ff->makeTrash();
-		 trashFronts.push_back(ff);
+		 if ( find(trashFronts.begin(), trashFronts.end(), ff) == trashFronts.end() )
+			 trashFronts.push_back(ff);
 	 }
  
 	 FireNode* FireDomain::FireNodeFactory(){
