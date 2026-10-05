@@ -537,7 +537,7 @@ def plot_simulation(pathes, fuel_map, elevation_map, myExtents, scalMap = None):
     """
     import matplotlib.pyplot as plt
     import matplotlib.patches as mpatches
-    import matplotlib.cm as cm
+    import matplotlib
     from matplotlib.colors import ListedColormap
     #import seaborn as sns
     # Create a figure with 2 axis (2 subplots)
@@ -645,7 +645,7 @@ def plot_simulation(pathes, fuel_map, elevation_map, myExtents, scalMap = None):
         CS = ax.imshow(scalMap, origin='lower', extent=myExtents)
         plt.colorbar(CS)
 
-    path_colors = [cm.get_cmap('autumn')(i / len(pathes)) for i in range(len(pathes))]
+    path_colors = [matplotlib.colormaps['autumn'](i / len(pathes)) for i in range(len(pathes))]
     # Plot current firefronts to the first 3 subplots
     for p, path in enumerate(pathes):
         patch = mpatches.PathPatch(path, edgecolor=path_colors[p], facecolor='none', alpha=1, lw=2)

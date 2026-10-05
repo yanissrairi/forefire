@@ -7,7 +7,7 @@ from datetime import timedelta,datetime
 import os
 import re
 from PIL import Image, ImageDraw, ImageFont 
-import matplotlib.cm as cm
+import matplotlib
     
 import glob
 import pandas as pd
@@ -646,7 +646,7 @@ def arrayToPng(data, output_filename, output_cbar_png=None, cmap_str = "viridis"
     
     norm_data = ((revdata  - vmin) / (vmax - vmin))
     
-    cmap = cm.get_cmap(cmap_str)
+    cmap = matplotlib.colormaps[cmap_str]
     rgba_data = (cmap(norm_data) * 255).astype(np.uint8)
     
     # Rendre les valeurs NaN transparentes
