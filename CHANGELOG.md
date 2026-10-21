@@ -60,6 +60,9 @@ Merged since v2.5.0, not yet released.
   ([#178])
 - `clear[]` no longer crashes after a simulation whose fire front stopped
   everywhere, for instance an ignition in non-burnable fuel. ([#194])
+- `clear[]` no longer aborts with a double free after a fire front merged with
+  itself and was left with fewer than 5 nodes: the nodes of its other part were
+  left on the deleted front, which was then deleted a second time.
 
 ### Changed
 
