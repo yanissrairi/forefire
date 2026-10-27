@@ -32,17 +32,21 @@ public:
 	double z; /*!< z coordinate*/
 
 	/*! \brief Default constructor */
-	FFPoint();
+	FFPoint() : x(0.), y(0.), z(0.) {}
 	/*! \brief 3d Constructor */
-	FFPoint(double, double, double);
+	FFPoint(double x0, double y0, double z0) : x(x0), y(y0), z(z0) {}
 	/*! \brief Destructor */
-	virtual ~FFPoint();
+	virtual ~FFPoint() {}
 	/*! \brief Copy-constructor
 	 *  \param[in] 'p' : point to be copied */
-	FFPoint(const FFPoint& p);
+	FFPoint(const FFPoint& p) : x(p.x), y(p.y), z(p.z) {}
 	/*! \brief Copy-assignment
 	 *  \param[in] 'p' : point to be copied */
-	FFPoint& operator=(const FFPoint& p);
+	// Spelled out rather than left implicit: declaring the copy-constructor above
+	// deprecates the implicit assignment, so every `a = b` on an FFPoint raises
+	// -Wdeprecated-copy. The three coordinates own no memory, so copying them is
+	// exactly what the implicit version did.
+	FFPoint& operator=(const FFPoint& p){ x = p.x; y = p.y; z = p.z; return *this; }
 
 	/*!  \brief overloaded operator +  */
 	friend const FFPoint operator+(const FFPoint&, const FFPoint&);
@@ -62,21 +66,21 @@ public:
 	friend int operator!=(const FFPoint&, const FFPoint&);
 
 	/*!  \brief mutator of the variable 'x'  */
-	void setX(const double&);
+	void setX(const double& x0){ x = x0; }
 	/*!  \brief mutator of the variable 'y'  */
-	void setY(const double&);
+	void setY(const double& y0){ y = y0; }
 	/*!  \brief mutator of the variable 'z'  */
-	void setZ(const double&);
+	void setZ(const double& z0){ z = z0; }
 	/*!  \brief mutator of the point itself  */
 	void setLoc(const double&, const double&, const double& = 0);
 	void setLoc(FFPoint);
 
 	/*!  \brief Accessor to 'x'  */
-	double& getX();
+	double& getX(){ return x; }
 	/*!  \brief Accessor to 'y'  */
-	double& getY();
+	double& getY(){ return y; }
 	/*!  \brief Accessor to 'z'  */
-	double& getZ();
+	double& getZ(){ return z; }
 	/*!  \brief Accessor to the point itself  */
 	FFPoint& getLoc();
 
