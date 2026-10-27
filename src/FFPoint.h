@@ -35,18 +35,6 @@ public:
 	FFPoint() : x(0.), y(0.), z(0.) {}
 	/*! \brief 3d Constructor */
 	FFPoint(double x0, double y0, double z0) : x(x0), y(y0), z(z0) {}
-	/*! \brief Destructor */
-	virtual ~FFPoint() {}
-	/*! \brief Copy-constructor
-	 *  \param[in] 'p' : point to be copied */
-	FFPoint(const FFPoint& p) : x(p.x), y(p.y), z(p.z) {}
-	/*! \brief Copy-assignment
-	 *  \param[in] 'p' : point to be copied */
-	// Spelled out rather than left implicit: declaring the copy-constructor above
-	// deprecates the implicit assignment, so every `a = b` on an FFPoint raises
-	// -Wdeprecated-copy. The three coordinates own no memory, so copying them is
-	// exactly what the implicit version did.
-	FFPoint& operator=(const FFPoint& p){ x = p.x; y = p.y; z = p.z; return *this; }
 
 	/*!  \brief overloaded operator +  */
 	friend const FFPoint operator+(const FFPoint&, const FFPoint&);
